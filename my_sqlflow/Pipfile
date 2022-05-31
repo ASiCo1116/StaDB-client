@@ -8,6 +8,7 @@ flask = "*"
 sqlflow = "*"
 flask-socketio = "*"
 beautifulsoup4 = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

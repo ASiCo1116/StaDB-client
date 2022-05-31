@@ -1,15 +1,18 @@
 from socket import socket
+import os
 from flask import Flask, jsonify, redirect, request, abort
 import json
 from flask_cors import CORS
 from client import MyClient
 from flask_socketio import SocketIO, send, emit
-
+from dotenv import load_dotenv
+load_dotenv(".env")
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
 
-client = MyClient(server_url='IP_TO_SQLFLOW_SERVER')
+sqlflow_server = os.environ.get("SQLFLOW_SERVER") or "127.0.0.1:50051"
+client = MyClient(server_url=sqlflow_server)
 
 @app.route('/')
 def index():
@@ -30,4 +33,4 @@ def handleCmd(msg):
 
 if __name__ == '__main__':
     app.debug = True
-    socketio.run(app) # set host and port if needed
+    socketio.run(app, host="0.0.0.0") # set host and port if needed
