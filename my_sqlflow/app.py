@@ -1,10 +1,7 @@
-from socket import socket
 import os
-from flask import Flask, jsonify, redirect, request, abort
-import json
-from flask_cors import CORS
+from flask import Flask, jsonify
 from client import MyClient
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, emit
 from dotenv import load_dotenv
 load_dotenv(".env")
 
