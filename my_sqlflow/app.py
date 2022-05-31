@@ -23,11 +23,14 @@ def handleDisconnection():
 def handleCmd(msg):
     print('Connected !')
     result = client.execute(msg, emit)
-    df = result._messages[0][0].to_dataframe()
-    head = df.columns.tolist()
-    table = df.to_json(orient="records")
-    emit('result', jsonify({'head': head, 'table': table}))
+    if result:
+        df = result._messages[0][0].to_dataframe()
+        head = df.columns.tolist()
+        table = df.to_json(orient="records")
+        emit('result', {'head': head, 'table': table})
+    else:
+        emit('result', "")
 
 if __name__ == '__main__':
-    app.debug = True
-    socketio.run(app, host="0.0.0.0") # set host and port if needed
+    app.debug = False
+    socketio.run(app, host="0.0.0.0", port=5000) # set host and port if needed

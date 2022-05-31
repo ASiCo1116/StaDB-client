@@ -9,8 +9,8 @@ from sqlflow.rows import Rows
 
 from bs4 import BeautifulSoup
 
-if not os.environ.get("SQLFLOW_SERVER"):
-    os.environ['SQLFLOW_DATASOURCE'] = "mysql://root:root@tcp(IP_TO_MYSQL)/?maxAllowedPacket=0"
+if not os.environ.get("SQLFLOW_DATASOURCE"):
+    os.environ['SQLFLOW_DATASOURCE'] = "mysql://root:root@tcp(127.0.0.1:3306)/?maxAllowedPacket=0"
 
 DEFAULT_TIMEOUT = 3600 * 10
 
